@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes"> 
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Chilaquerito - Los Mejores Chilaquiles</title>
     
     <style>
+        /* ... Tu CSS (se mantiene intacto para no introducir errores) ... */
+
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
 
         * {
@@ -69,7 +71,7 @@
             z-index: 1;
             text-align: center;
             max-width: 800px;
-        }
+            }
 
         .home-logo {
             width: 400px;
@@ -145,6 +147,10 @@
             z-index: 10;
             min-height: 60px;
             line-height: 1.2;
+            text-decoration: none; /* Añadido para los <a> */
+            display: inline-flex; /* Añadido para los <a> */
+            justify-content: center; /* Añadido para los <a> */
+            align-items: center; /* Añadido para los <a> */
         }
 
         .home-btn:active {
@@ -259,6 +265,8 @@
             z-index: 10;
             min-height: 48px;
             line-height: 1.2;
+            display: inline-flex; /* Asegura que el padding funcione bien */
+            align-items: center; /* Centra el texto */
         }
 
         .back-home-btn:active {
@@ -555,12 +563,12 @@
 <body>
     <div class="home-page" id="homePage">
         <div class="home-content">
-            <img src="/chilaquerito.png" alt="Logo Chilaquerito" class="home-logo">
+            <img src="chilaquerito.png" alt="Logo Chilaquerito" class="home-logo">
             <h1 class="home-title">CHILAQUERITO</h1>
             <p class="home-subtitle">LOS MEJORES CHILAQUILES</p>
             <div class="home-buttons">
-                <button class="home-btn" type="button">Menú</button>
-                <button class="home-btn" type="button">Sobre Nosotros</button>
+                <a href="#" class="home-btn" role="button">Menú</a>
+                <a href="#" class="home-btn" role="button">Sobre Nosotros</a>
             </div>
         </div>
     </div>
@@ -569,13 +577,13 @@
         <div class="container">
             <div class="header">
                 <div class="logo-section">
-                    <img src="/chilaquerito.png" alt="Logo Chilaquerito" class="logo-image">
+                    <img src="chilaquerito.png" alt="Logo Chilaquerito" class="logo-image">
                     <div>
                         <h2>CHILAQUERITO</h2>
                         <p class="page-title">Menú</p>
                     </div>
                 </div>
-                <button class="back-home-btn" type="button">← Volver al Inicio</button>
+                <a href="#" class="back-home-btn" role="button">← Volver al Inicio</a>
                 
                 <div class="slogan">
                     Expertos en chilaquiles como a ti te gustan<br>Todo el día, todos los días
@@ -654,7 +662,7 @@
                 Chilaquerito · Chilaquiles
             </div>
 
-            <button class="back-to-top" type="button" id="backToTopMenu" aria-label="Volver arriba">↑</button>
+            <a href="#" class="back-to-top" id="backToTopMenu" aria-label="Volver arriba" role="button">↑</a>
         </div>
     </div>
 
@@ -662,13 +670,13 @@
         <div class="container">
             <div class="header">
                 <div class="logo-section">
-                    <img src="/chilaquerito.png" alt="Logo Chilaquerito" class="logo-image">
+                    <img src="chilaquerito.png" alt="Logo Chilaquerito" class="logo-image">
                     <div>
                         <h2>CHILAQUERITO</h2>
                         <p class="page-title">Sobre Nosotros</p>
                     </div>
                 </div>
-                <button class="back-home-btn" type="button">← Volver al Inicio</button>
+                <a href="#" class="back-home-btn" role="button">← Volver al Inicio</a>
             </div>
 
             <div class="sobre-nosotros">
@@ -703,12 +711,13 @@
                 Chilaquerito · Chilaquiles
             </div>
 
-            <button class="back-to-top" type="button" id="backToTopSobre" aria-label="Volver arriba">↑</button>
+            <a href="#" class="back-to-top" id="backToTopSobre" aria-label="Volver arriba" role="button">↑</a>
         </div>
     </div>
 
     <script>
         function addiOSButtonHandler(button, callback) {
+            // Se usa 'button' en el nombre de la función, pero acepta <a> también
             button.addEventListener('click', callback);
             button.addEventListener('touchstart', function(e) {
                 e.preventDefault();
@@ -738,18 +747,22 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const menuBtn = document.querySelector('.home-buttons button:nth-child(1)');
-            const sobreBtn = document.querySelector('.home-buttons button:nth-child(2)');
+            // SELECCIONAR LOS NUEVOS ELEMENTOS <a>
+            const menuBtn = document.querySelector('.home-buttons a:nth-child(1)');
+            const sobreBtn = document.querySelector('.home-buttons a:nth-child(2)');
             
+            // Seleccionar todos los <a> con la clase .back-home-btn
+            const backBtns = document.querySelectorAll('.back-home-btn'); 
+            const backToTopBtns = document.querySelectorAll('.back-to-top');
+
+            // Asignar manejadores a los nuevos enlaces
             addiOSButtonHandler(menuBtn, function() { showPage('menu'); });
             addiOSButtonHandler(sobreBtn, function() { showPage('sobre-nosotros'); });
 
-            const backBtns = document.querySelectorAll('.back-home-btn');
             backBtns.forEach(btn => {
                 addiOSButtonHandler(btn, function() { showPage('home'); });
             });
 
-            const backToTopBtns = document.querySelectorAll('.back-to-top');
             backToTopBtns.forEach(btn => {
                 addiOSButtonHandler(btn, function() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
