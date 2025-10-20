@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Chilaquerito - Los Mejores Chilaquiles</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        :root {
+            --verde: #0b6b36;
+            --rojo: #d82020;
+            --blanco: #ffffff;
+            --crema: #fef9f3;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--crema);
+            color: #333;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation;
+        }
+
+        /* PÁGINA DE INICIO */
+        .home-page {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--rojo) 100%);
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat center;
+            background-size: cover;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .home-logo {
+            width: 400px;
+            height: 400px;
+            max-width: 90vw;
+            object-fit: contain;
+            background: var(--blanco);
+            padding: 35px;
+            border-radius: 50%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .home-title {
+            color: var(--blanco);
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .home-subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .home-btn {
+            background: var(--blanco);
+            color: var(--verde);
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+            min-height: 60px;
+            line-height: 1.2;
+        }
+
+        .home-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* CONTENIDO DE LA PÁGINA */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: var(--blanco);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--crema);
+            padding-bottom: 20px;
+        }
+
+        .logo-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            background: var(--blanco);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h2 {
+            font-size: 32px;
+            color: var(--rojo);
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .page-title {
+            margin: 5px 0 0 0;
+            font-size: 20px;
+            color: var(--verde);
+            letter-spacing: 4px;
+            font-weight: 800;
+        }
+
+        .slogan {
+            background: linear-gradient(135deg, var(--verde), var(--rojo));
+            color: var(--blanco);
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 20px 0;
+            animation: slideInSlogan 1s ease-out;
+            text-transform: uppercase;
+        }
+
+        @keyframes slideInSlogan {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .back-home-btn {
+            background: var(--verde);
+            color: var(--blanco);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+            min-height: 48px;
+            line-height: 1.2;
+        }
+
+        .back-home-btn:active {
+            transform: scale(0.95);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .menu-principal {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h3 {
+            font-size: 32px;
+            color: var(--rojo);
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .menu-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--crema);
+            border-radius: 15px;
+            border-left: 6px solid var(--verde);
+            transition: transform 0.3s, box-shadow 0.3s;
+            touch-action: manipulation;
+        }
+
+        .menu-item:active {
+            transform: translateX(3px);
+        }
+
+        .item-number {
+            display: inline-block;
+            background: var(--rojo);
+            color: var(--blanco);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--verde);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .item-description {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-section h4 {
+            font-size: 20px;
+            color: var(--rojo);
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+        }
+
+        .sidebar-section li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 15px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .sidebar-section li:last-child {
+            border-bottom: none;
+        }
+
+        .salsa-badge {
+            display: inline-block;
+            background: var(--verde);
+            color: var(--blanco);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .paquetes-text {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .paquetes-title {
+            color: var(--verde);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .sobre-nosotros {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .sobre-nosotros h3 {
+            font-size: 32px;
+            color: var(--rojo);
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .info-box {
+            padding: 20px;
+            background: var(--crema);
+            border-radius: 12px;
+            border-left: 5px solid var(--verde);
+        }
+
+        .info-box strong {
+            color: var(--rojo);
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .whatsapp-link, .view-map-btn {
+            color: var(--verde);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+            padding: 8px 16px;
+            background: var(--blanco);
+            border-radius: 8px;
+            min-height: 40px;
+            line-height: 1.2;
+        }
+
+        .whatsapp-link:active, .view-map-btn:active {
+            transform: scale(0.95);
+        }
+
+        .whatsapp-hint {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .map-container {
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--verde), var(--rojo));
+            color: var(--blanco);
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--rojo);
+            color: var(--blanco);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(216, 32, 32, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            border: none;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            min-height: 60px;
+            line-height: 1;
+        }
+
+        .back-to-top:active {
+            transform: scale(0.9);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .home-logo { width: 340px; height: 340px; }
+            .home-title { font-size: 36px; }
+            .home-subtitle { font-size: 18px; }
+            .home-btn { padding: 15px 35px; font-size: 18px; }
+            .header h2 { font-size: 28px; }
+            .logo-image { width: 80px; height: 80px; }
+            .menu-principal, .sobre-nosotros { padding: 25px; }
+        }
+
+        @media (max-width: 480px) {
+            .home-logo { width: 320px; height: 320px; padding: 25px; }
+            .home-title { font-size: 28px; }
+            .home-subtitle { font-size: 16px; }
+            .home-btn { padding: 12px 25px; font-size: 16px; }
+            .logo-section { flex-direction: column; text-align: center; }
+            .header h2 { font-size: 24px; }
+            .page-title { font-size: 18px; }
+            .section-header h3 { font-size: 24px; }
+            .item-name { font-size: 16px; }
+            .slogan { font-size: 16px; padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="home-page" id="homePage">
+        <div class="home-content">
+            <!-- ✅ TU IMAGEN DE IMGUR INTEGRADA -->
+            <img src="https://i.imgur.com/pL47ut0.png" alt="Logo Chilaquerito" class="home-logo">
+            <h1 class="home-title">CHILAQUERITO</h1>
+            <p class="home-subtitle">LOS MEJORES CHILAQUILES</p>
+            <div class="home-buttons">
+                <button class="home-btn" type="button">Menú</button>
+                <button class="home-btn" type="button">Sobre Nosotros</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content" id="menuPage">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <!-- ✅ TU IMAGEN DE IMGUR INTEGRADA -->
+                    <img src="https://i.imgur.com/pL47ut0.png" alt="Logo Chilaquerito" class="logo-image">
+                    <div>
+                        <h2>CHILAQUERITO</h2>
+                        <p class="page-title">Menú</p>
+                    </div>
+                </div>
+                <button class="back-home-btn" type="button">← Volver al Inicio</button>
+                
+                <div class="slogan">
+                    Expertos en chilaquiles como a ti te gustan<br>Todo el día, todos los días
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-principal">
+                    <div class="section-header">
+                        <h3>MENÚ</h3>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-number">1</div>
+                        <div class="item-name">Chilaquerito 1pcs</div>
+                        <div class="item-description">
+                            Totopos dorados bañados en salsa verde picosita, acompañados de crema, queso, cebolla, cilantro
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-number">2</div>
+                        <div class="item-name">Chilaquerito 2 pcs</div>
+                        <div class="item-description">
+                            Totopos dorados bañados en salsa verde picosita, acompañados de crema, queso, cebolla, cilantro y tu proteína de elección (res – pollo)
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-number">3</div>
+                        <div class="item-name">Chilaquerito 3pcs</div>
+                        <div class="item-description">
+                            Deliciosa torta de chilaquiles acompañada con crema, queso, cebolla, cilantro y la carne de tu elección
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-number">4</div>
+                        <div class="item-name">Chilaquerito 4 pcs</div>
+                        <div class="item-description">
+                            Tacos doraditos rellenos de pollo, acompañados de deliciosa salsita verde, crema, queso, cilantro y cebolla
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h4>Salsas</h4>
+                        <ul>
+                            <li><span class="salsa-badge">VERDE</span></li>
+                            <li><span class="salsa-badge">HABANERO</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4>Paquetes</h4>
+                        <p class="paquetes-text">
+                            <strong class="paquetes-title">Del 1 al 4 incluye:</strong>
+                            • Bolillito<br>
+                            • Incluye una bebida a elegir entre: Agua del día, Café o por $7 pesos más un refresco <br>
+                        </p>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h4>Bebidas</h4>
+                        <ul>
+                            <li>Agua de sabor (Horchata, Tamarindo)</li>
+                            <li>Agua Natural</li>
+                            <li>Café</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="footer">
+                Chilaquerito · Chilaquiles
+            </div>
+
+            <button class="back-to-top" type="button" id="backToTopMenu" aria-label="Volver arriba">↑</button>
+        </div>
+    </div>
+
+    <div class="page-content" id="sobreNosotrosPage">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <!-- ✅ TU IMAGEN DE IMGUR INTEGRADA -->
+                    <img src="https://i.imgur.com/pL47ut0.png" alt="Logo Chilaquerito" class="logo-image">
+                    <div>
+                        <h2>CHILAQUERITO</h2>
+                        <p class="page-title">Sobre Nosotros</p>
+                    </div>
+                </div>
+                <button class="back-home-btn" type="button">← Volver al Inicio</button>
+            </div>
+
+            <div class="sobre-nosotros">
+                <h3>SOBRE NOSOTROS</h3>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <strong>Horario:</strong>
+                        <p>Lunes a sábado<br>7:30 am a 5:00 pm</p>
+                    </div>
+                    <div class="info-box">
+                        <strong>Ubicación:</strong>
+                        <p>Av. Benito Juárez Garcia Sur 223,<br>Universidad, 50130<br>Toluca de Lerdo, Méx.</p>
+                        <a href="https://maps.google.com/?q=Av.+Benito+Juárez+Garcia+Sur+223,+Universidad,+50130+Toluca+de+Lerdo,+Méx" target="_blank" rel="noopener noreferrer" class="view-map-btn">📍 Ver en Google Maps</a>
+                        <div class="map-container">
+                            <iframe src="https://maps.google.com/maps?width=100%25&height=300&hl=es&q=Av.%20Benito%20Ju%C3%A1rez%20Garcia%20Sur%20223,%20Universidad,%2050130%20Toluca%20de%20Lerdo,%20M%C3%A9x+(Chilaquerito)&t=&z=17&ie=UTF8&iwloc=B&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>WhatsApp:</strong>
+                        <p>
+                            <a href="https://wa.me/527208431594" target="_blank" rel="noopener noreferrer" class="whatsapp-link">
+                                <span>💬</span>
+                                <span>722 843 1594</span>
+                            </a>
+                        </p>
+                        <p class="whatsapp-hint">Haz clic para enviarnos un mensaje</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                Chilaquerito · Chilaquiles
+            </div>
+
+            <button class="back-to-top" type="button" id="backToTopSobre" aria-label="Volver arriba">↑</button>
+        </div>
+    </div>
+
+    <script>
+        function addiOSButtonHandler(button, callback) {
+            button.addEventListener('click', callback);
+            button.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                callback();
+            }, { passive: false });
+        }
+
+        function showPage(page) {
+            const homePage = document.getElementById('homePage');
+            const menuPage = document.getElementById('menuPage');
+            const sobreNosotrosPage = document.getElementById('sobreNosotrosPage');
+
+            homePage.style.display = 'none';
+            menuPage.classList.remove('active');
+            sobreNosotrosPage.classList.remove('active');
+
+            if (page === 'home') {
+                homePage.style.display = 'flex';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (page === 'menu') {
+                menuPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (page === 'sobre-nosotros') {
+                sobreNosotrosPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.home-buttons button:nth-child(1)');
+            const sobreBtn = document.querySelector('.home-buttons button:nth-child(2)');
+            
+            addiOSButtonHandler(menuBtn, function() { showPage('menu'); });
+            addiOSButtonHandler(sobreBtn, function() { showPage('sobre-nosotros'); });
+
+            const backBtns = document.querySelectorAll('.back-home-btn');
+            backBtns.forEach(btn => {
+                addiOSButtonHandler(btn, function() { showPage('home'); });
+            });
+
+            const backToTopBtns = document.querySelectorAll('.back-to-top');
+            backToTopBtns.forEach(btn => {
+                addiOSButtonHandler(btn, function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showPage('home');
+        });
+
+        window.addEventListener('scroll', () => {
+            const isMenuVisible = document.getElementById('menuPage').classList.contains('active');
+            const isSobreVisible = document.getElementById('sobreNosotrosPage').classList.contains('active');
+            const backToTopBtns = document.querySelectorAll('.back-to-top');
+
+            backToTopBtns.forEach(btn => {
+                if ((isMenuVisible || isSobreVisible) && window.pageYOffset > 300) {
+                    btn.style.display = 'flex';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
