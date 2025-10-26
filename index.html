@@ -8,8 +8,6 @@
     <title>Chilaquerito - Los Mejores Chilaquiles</title>
     
     <style>
-        /* ... Tu CSS (se mantiene intacto para no introducir errores) ... */
-
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
 
         * {
@@ -39,7 +37,6 @@
             touch-action: manipulation;
         }
 
-        /* PÁGINA DE INICIO */
         .home-page {
             min-height: 100vh;
             min-height: -webkit-fill-available;
@@ -71,7 +68,7 @@
             z-index: 1;
             text-align: center;
             max-width: 800px;
-            }
+        }
 
         .home-logo {
             width: 400px;
@@ -147,17 +144,16 @@
             z-index: 10;
             min-height: 60px;
             line-height: 1.2;
-            text-decoration: none; /* Añadido para los <a> */
-            display: inline-flex; /* Añadido para los <a> */
-            justify-content: center; /* Añadido para los <a> */
-            align-items: center; /* Añadido para los <a> */
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .home-btn:active {
             transform: scale(0.95);
         }
 
-        /* CONTENIDO DE LA PÁGINA */
         .page-content {
             display: none;
         }
@@ -225,7 +221,7 @@
         }
 
         .slogan {
-            background: linear-gradient(135deg, var(--verde), var(--rojo));
+            background:#be1414;
             color: var(--blanco);
             padding: 20px 30px;
             border-radius: 15px;
@@ -265,8 +261,8 @@
             z-index: 10;
             min-height: 48px;
             line-height: 1.2;
-            display: inline-flex; /* Asegura que el padding funcione bien */
-            align-items: center; /* Centra el texto */
+            display: inline-flex;
+            align-items: center;
         }
 
         .back-home-btn:active {
@@ -475,6 +471,34 @@
             color: #777;
         }
 
+        .info-comment-box {
+            padding: 20px;
+            background: var(--crema);
+            border-radius: 12px;
+            border-left: 5px solid var(--verde);
+            margin-top: 20px;
+            text-align: center;
+        }
+        .info-comment-box a {
+            color: var(--verde);
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--blanco);
+            border-radius: 8px;
+            transition: all 0.3s;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .info-comment-box a:active {
+            transform: scale(0.95);
+        }
+
         .map-container {
             margin-top: 15px;
             border-radius: 12px;
@@ -489,7 +513,7 @@
         }
 
         .footer {
-            background: linear-gradient(135deg, var(--verde), var(--rojo));
+            background: #be1414;
             color: var(--blanco);
             text-align: center;
             padding: 30px;
@@ -534,7 +558,6 @@
             transform: scale(0.95);
         }
 
-        /* RESPONSIVE */
         @media (max-width: 968px) {
             .menu-grid { grid-template-columns: 1fr; }
             .home-logo { width: 340px; height: 340px; }
@@ -659,7 +682,7 @@
             </div>
 
             <div class="footer">
-                Chilaquerito · Chilaquiles
+                Chilaquerito · Chilaquiles y más
             </div>
 
             <a href="#" class="back-to-top" id="backToTopMenu" aria-label="Volver arriba" role="button">↑</a>
@@ -705,10 +728,18 @@
                         <p class="whatsapp-hint">Haz clic para enviarnos un mensaje</p>
                     </div>
                 </div>
+                <div class="info-comment-box">
+                    <strong>Información y Comentarios:</strong>
+                    <p>¿Tienes preguntas o sugerencias? ¡Contáctanos!</p>
+                    <a href="https://wa.me/527208431594?text=Hola,%20tengo%20una%20pregunta%20o%20comentario%20sobre%20Chilaquerito." target="_blank" rel="noopener noreferrer">
+                        <span>💬</span>
+                        <span>Enviar mensaje por WhatsApp</span>
+                    </a>
+                </div>
             </div>
 
             <div class="footer">
-                Chilaquerito · Chilaquiles
+                Chilaquerito · Chilaquiles y más
             </div>
 
             <a href="#" class="back-to-top" id="backToTopSobre" aria-label="Volver arriba" role="button">↑</a>
@@ -717,7 +748,7 @@
 
     <script>
         function addiOSButtonHandler(button, callback) {
-            // Se usa 'button' en el nombre de la función, pero acepta <a> también
+            // Maneja clics y toques para compatibilidad con iOS
             button.addEventListener('click', callback);
             button.addEventListener('touchstart', function(e) {
                 e.preventDefault();
@@ -726,6 +757,7 @@
         }
 
         function showPage(page) {
+            // Cambia entre las páginas del sitio (Home, Menú, Sobre Nosotros)
             const homePage = document.getElementById('homePage');
             const menuPage = document.getElementById('menuPage');
             const sobreNosotrosPage = document.getElementById('sobreNosotrosPage');
@@ -747,15 +779,13 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // SELECCIONAR LOS NUEVOS ELEMENTOS <a>
+            // Inicializa los manejadores de eventos para los botones de navegación
             const menuBtn = document.querySelector('.home-buttons a:nth-child(1)');
             const sobreBtn = document.querySelector('.home-buttons a:nth-child(2)');
             
-            // Seleccionar todos los <a> con la clase .back-home-btn
             const backBtns = document.querySelectorAll('.back-home-btn'); 
             const backToTopBtns = document.querySelectorAll('.back-to-top');
 
-            // Asignar manejadores a los nuevos enlaces
             addiOSButtonHandler(menuBtn, function() { showPage('menu'); });
             addiOSButtonHandler(sobreBtn, function() { showPage('sobre-nosotros'); });
 
@@ -773,6 +803,7 @@
         });
 
         window.addEventListener('scroll', () => {
+            // Muestra u oculta el botón "Volver arriba" según la posición del scroll
             const isMenuVisible = document.getElementById('menuPage').classList.contains('active');
             const isSobreVisible = document.getElementById('sobreNosotrosPage').classList.contains('active');
             const backToTopBtns = document.querySelectorAll('.back-to-top');
